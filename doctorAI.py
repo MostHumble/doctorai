@@ -408,7 +408,7 @@ def train_doctorAI(
 		use_noise, x, y, mask, lengths, cost =  build_model(tparams, options)
 		grads = T.grad(cost, wrt=tparams.values())
 		f_grad_shared, f_update = adadelta(tparams, grads, x, y, mask, lengths, cost, options)
-	elif useTime and not embFineTune:
+	elif not useTime and not embFineTune:
 		print 'not using duration information, not fine-tuning code representations'
 		W_emb = theano.shared(params['W_emb'], name='W_emb')
 		use_noise, x, y, mask, lengths, cost =  build_model(tparams, options, W_emb)
