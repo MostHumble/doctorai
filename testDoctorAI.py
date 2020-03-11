@@ -30,12 +30,14 @@ def recallTop(y_true, y_pred, rank=[10, 20, 30]):
 	return (np.array(recall)).mean(axis=0).tolist()
 
 def calculate_r_squared(trueVec, predVec, options):
-	mean_duration = options['mean_duration']
 	if options['useLogTime']:
 		trueVec = np.log(np.array(trueVec) + options['logEps'])
+		mean_duration = np.log(options['mean_duration'])
 	else:
 		trueVec = np.array(trueVec)
+		mean_duration = options['mean_duration']
 	predVec = np.array(predVec)
+
 
 	numerator = ((trueVec - predVec) ** 2).sum()
 	denominator = ((trueVec - mean_duration) ** 2).sum()
